@@ -8,16 +8,25 @@ function createContainer(data){
         document.createElement('div'),
         document.createElement('div'),
         document.createElement('div'),
-        document.createElement('img'),
+        document.createElement('ul'),
+        document.createElement('img')
     ];
     pokeArr[0].innerHTML = `Name: ${data.name}`;
     pokeArr[1].innerHTML = `Height: ${data.height}`;
     pokeArr[2].innerHTML = `Weight: ${data.weight}`;
-    pokeArr[3].src = data.sprites.front_default;
-    pokeArr[3].addEventListener('mouseover',()=>{pokeArr[3].src=data.sprites.back_default});
-    pokeArr[3].addEventListener('mouseout',()=>{pokeArr[3].src=data.sprites.front_default});
+    pokeArr[3].innerHTML = ``
+    pokeArr[4].src = data.sprites.front_default;
+    pokeArr[4].addEventListener('mouseover',()=>{pokeArr[4].src=data.sprites.back_default});
+    pokeArr[4].addEventListener('mouseout',()=>{pokeArr[4].src=data.sprites.front_default});
 
     pokeArr.forEach(element=>{results.appendChild(element)});
+
+    const types = []
+    for (let i = 0; i < data.types.length; i++){
+        let li = document.createElement('li') 
+        li.innerHTML = data.types[i].type.name;
+        pokeArr[3].appendChild(li);
+    }
 };
 
 
