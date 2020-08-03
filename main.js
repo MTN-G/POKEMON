@@ -21,7 +21,6 @@ function createContainer(data){
 
     pokeArr.forEach(element=>{results.appendChild(element)});
 
-    const types = []
     for (let i = 0; i < data.types.length; i++){
         let li = document.createElement('li') 
         li.innerHTML = data.types[i].type.name;
