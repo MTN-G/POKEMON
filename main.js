@@ -25,7 +25,12 @@ function createContainer(data){
         let li = document.createElement('li') 
         li.innerHTML = data.types[i].type.name;
         pokeArr[3].appendChild(li);
+        li.addEventListener('click', ()=>{
+            
+
+        })
     }
+
 };
 
 
@@ -41,3 +46,5 @@ const searchPokemon = async (pokemonId) => {
 searchButton.addEventListener('click', ()=>{
     results.innerHTML = ""
     searchPokemon(searchInput.value)});
+
+
