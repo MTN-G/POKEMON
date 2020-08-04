@@ -2,6 +2,7 @@ const searchButton = document.getElementById("searchButon");
 const searchInput = document.getElementById("search");
 searchInput.placeholder="Search Your Pokemon..."
 const results = document.getElementById("results");
+const list = document.createElement('ul');
 
 function createContainer(data){
     const pokeArr = [
@@ -25,8 +26,11 @@ function createContainer(data){
         let li = document.createElement('li') 
         li.innerHTML = data.types[i].type.name;
         pokeArr[3].appendChild(li);
-        li.addEventListener('click', ()=>pokemonInType(li.innerText)) 
-    };
+        li.addEventListener('click', ()=>{
+        list.innerText = ''
+        pokemonInType(li.innerText) 
+    });
+}
 }
 
 const searchPokemon = async (pokemonId) => {
@@ -45,17 +49,28 @@ searchButton.addEventListener('click', ()=>{
 const pokemonInType = async(type)=>{
     const res = await axios.get(`http://pokeapi.co/api/v2/type/${type}`)
     console.log(res.data.pokemon[0].pokemon.name)
-    const list = document.createElement('ul');
-    list.innerText= `Other pokemon of this type:`;
+    list.innerText= `Other pokemon of this type (${type}):`;
     for (let x of res.data.pokemon) {
         const name = x.pokemon.name;
         const item = document.createElement('li');
         item.innerText = name;
         list.appendChild(item);
+        item.addEventListener('click', ()=>{
+            results.innerText = ''
+            searchPokemon(name);
+        })
+    
+
+        
     }
     results.appendChild(list);
+    
 
 }
+
+
+
+
 
 
 
