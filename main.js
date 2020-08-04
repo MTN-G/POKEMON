@@ -25,8 +25,9 @@ function createContainer(data){
         let li = document.createElement('li') 
         li.innerHTML = data.types[i].type.name;
         pokeArr[3].appendChild(li);
-        li.addEventListener('click', pokemonInType(li.innerHTML)) 
+        li.addEventListener('click', pokemonInType) 
     };
+}
         
 
 const searchPokemon = async (pokemonId) => {
@@ -43,16 +44,17 @@ searchButton.addEventListener('click', ()=>{
     searchPokemon(searchInput.value)});
 
 const pokemonInType = async(type)=>{
-    const res = await axios.get(`http://pokeapi.co/api/v2/pokemon/${type}`)
+    const { res } = await axios.get(`http://pokeapi.co/api/v2/pokemon/${type}`);
     const list = document.createElement('ul');
-    list.innerText= `Other pokemon of this type:`;
+    list.innerText = `Other pokemon of this type:`;
     for (let x of res) {
         const name = x.pokemon.name;
         const item = document.createElement('li');
         item.innerText = name;
         list.appendChild(item);
-    }
-
+    };
 }
+
+
 
 
