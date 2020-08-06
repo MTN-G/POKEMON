@@ -1,6 +1,7 @@
 const searchButton = document.getElementById("searchButon");
 const searchInput = document.getElementById("search");
 searchInput.placeholder="Search Your Pokemon..."
+const randomButton = document.getElementById("random")
 const results = document.getElementById("results");
 const list = document.createElement('ul');
 
@@ -38,7 +39,7 @@ const searchPokemon = async (pokemonId) => {
     const { data } = await axios.get(`http://pokeapi.co/api/v2/pokemon/${pokemonId}`);
     console.log(data);
     createContainer(data);
-    } catch(e) { alert(e.message)};
+    } catch(e) { alert("sorry, please try again...")};
     };
 
 
@@ -70,10 +71,9 @@ const pokemonInType = async(type)=>{
 
 
 
-
-
-
-
-
-
-
+randomButton.addEventListener('click', ()=>{
+    let randomPoke = Math.floor(Math.random(1, 100)*1000);
+    console.log(randomPoke);
+    results.innerHTML = ""
+    searchPokemon(randomPoke)}); 
+    
